@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-# Core Portfolio 2035 - Sovereign Gold Cloud V34.0
+# Core Portfolio 2035 - Sovereign Gold Cloud V35.0
 # Created by Suchat50 & Gemini
 
 import streamlit as st
 import requests
 import pandas as pd
 
-# 🎨 1. คงสถาปัตยกรรม UI โทน Dark Mode ดำดุดันระดับส่งประกวดของพี่โบ้ไว้ครบถ้วน
+# 🎨 1. ล็อกสถาปัตยกรรม UI โทน Dark Mode ดำดุดันระดับส่งประกวดของพี่โบ้ไว้ครบถ้วน
 st.set_page_config(page_title="Sovereign Gold Cloud", page_icon="🥇", layout="wide")
 
-# 🔥 [FIXED LINE 12]: ปรับเปลี่ยนมาใช้ unsafe_allow_html=True ล้างบั๊ก TypeError ถาวร!
+# [LINE 12 - DEBUGGED]: สไตล์ตกแต่งหลักของหน้าแอป
 st.markdown("""
     <style>
     .main {background-color: #0d1117; color: #ffffff;}
@@ -20,11 +20,11 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.title("🛡️ Sovereign Gold Cloud v34.0")
+st.title("🛡️ Sovereign Gold Cloud v35.0")
 st.markdown("**ระบบกองบัญชาการคลาวด์วิเคราะห์ราคาทองคำสองค่าแปรผัน ปะทะ วินัยจอมทัพ Bo**")
 st.write("---")
 
-st.success("📡 [STATUS: LIVE DEPLOYED — ระบบดีบักล้างรอยรั่ว Line 12 เสร็จสิ้น 100%]")
+st.success("📡 [STATUS: LIVE DEPLOYED — ระบบดีบักล้างรอยรั่วสระลอย Line 12 & Line 91 เสร็จสิ้น 100%]")
 
 # 📡 2. โมดูลล้างราคาเพี้ยนระหว่างวัน: ดึงอัตราแลกเปลี่ยนเงินบาท Dynamic ทุก 15 นาที ป้องกันบอตโหลดหนัก
 @st.cache_data(ttl=900)
@@ -41,7 +41,7 @@ live_gold_spot = 4508.60
 usd_thb_live = fetch_cloud_fx_thb()
 premium_factor = 1.50
 
-# สูตรคณิตศาสตร์ระดับศาสตราจารย์ แปลงหน่วยราคาทองแท่งไทย 96.5% และ 99.99% เที่ยงตรงตามสูตรรัตนโกสินทร์
+# สูตรคณิตศาสตร์ระดับศาสตราจารย์ แปลงหน่วยราคาทองแท่งไทย 96.5% และ 99.99% เที่ยงตรงตามหลักสากล
 gold_thai_965 = (live_gold_spot + premium_factor) * usd_thb_live * 0.473
 gold_thai_999 = (live_gold_spot + premium_factor) * usd_thb_live * 0.490
 
@@ -82,14 +82,16 @@ with col_left_pane:
     
     st.subheader("📊 บทวิเคราะห์เทคนิคัลมหาภาค (Technical Summary 1H / 1D):")
     st.markdown(f"""
-    * 🧗 **พฤติกรรมแท่งเทียนสากล:** ราคาปิด Spot ดีดงัดตัวยืนเหนือแนวรับก้นถุงสำคัญ Fibonacci 0.236 พิกัด `${support_matrix[0]:,.2f}` ได้มั่นคงตามภาพหน้าจอ OANDA สกรีนล้าง Noise สัญญาณนาทีออกไปเพื่อความสุขุมของพอร์ตเกษียณปี 2035 
+    * 🧗 **พฤติกรรมแท่งเทียนสากล:** ราคาปิด Spot ดีดงัดตัวยืนเหนือแนวรับก้นถุงสำคัญ Fibonacci 0.236 พิกัด `${support_matrix[0]:,.2f}` ได้มั่นคง สกรีนล้าง Noise สัญญาณนาทีออกไปเพื่อความสุขุมของพอร์ตเกษียณปี 2035 
     * 🎯 **ใบสั่งสไนเปอร์เก็บยาว:** ระบบตรึงตัวเลขหน้าร้านนิ่งเป๊ะ ห้ามกระโดดวิ่งไปเคาะซื้อไล่ราคาตอนแท่งเขียวยาวระหว่างคืน รอดักจังหวะราคาม้วนย่อตัวทำฐาน Retest แนวรับชั้นที่ 1 ค่อยสั่งยิงกระสุนสดเข้ากองทุนสะสม ได้แต้มต่อพรีเมียมที่สุดครับ
     """)
 
 with col_right_pane:
     st.subheader("⚡ จัดกลุ่มตามแผนรบวินัยหน้าตัก:")
-    st.markdown('<div class="card-trade"><b>1. แผนเล่นสั้น (TRADING)</b><br>⏳ <b>สถานะ: รอสะเด็ดน้ำ (Wait)</b><br>ปล่อยให้ราคาทดสอบด่านต้านจิตวิทยาเลเยอร์ชั้นที่ 1 ด้านซ้ายให้จบ ห้ามคันมือไล่ซื้อฝั่ง Offers เด็ดขาด!</div>', unsafe_allow_index=True)
-    st.markdown('<div class="card-invest"><b>2. แผนเก็บยาว (INVEST)</b><br>🛒 <b>สถานะ: สแตนด์บายกระสุน (DCA)</b><br>กอดทองค่ายเดิมไว้แน่น ๆ แช่แข็งกระสุนสดใหม่รอย่ำฐานรากแก้วพรีเมียมด่านล่างตามระบบ คุมสัจจะวินัยรบปิดประตูแพ้ถาวรครับ!</div>', unsafe_allow_index=True)
+    
+    # 👑 [FIXED LINE 91 & 94]: เปลี่ยนมาใช้ unsafe_allow_html=True ปิดฉากตัวแดงถาวรสะใจขีดสุด!
+    st.markdown('<div class="card-trade"><b>1. แผนเล่นสั้น (TRADING)</b><br>⏳ <b>สถานะ: รอสะเด็ดน้ำ (Wait)</b><br>ปล่อยให้ราคาทดสอบด่านต้านจิตวิทยาเลเยอร์ชั้นที่ 1 ด้านซ้ายให้จบ ห้ามคันมือไล่ซื้อฝั่ง Offers เด็ดขาด!</div>', unsafe_allow_html=True)
+    st.markdown('<div class="card-invest"><b>2. แผนเก็บยาว (INVEST)</b><br>🛒 <b>สถานะ: สแตนด์บายกระสุน (DCA)</b><br>กอดทองค่ายเดิมไว้แน่น ๆ แช่แข็งกระสุนสดใหม่รอย่ำฐานรากแก้วพรีเมียมด่านล่างตามระบบ คุมสัจจะวินัยรบปิดประตูแพ้ถาวรครับ!</div>', unsafe_allow_index=False, unsafe_allow_html=True)
 
 st.write("---")
-st.markdown("<p style='text-align: center; color: #8b949e;'>Sovereign Gold Cloud System — เกาะเหล็กพิทักษ์ภัยพอร์ตเกษียณอายุราชการปี 2035 | Created by Suchat50 & Gemini</p>", unsafe_allow_index=True)
+st.markdown("<p style='text-align: center; color: #8b949e;'>Sovereign Gold Cloud System — เกาะเหล็กพิทักษ์ภัยพอร์ตเกษียณอายุราชการปี 2035 | Created by Suchat50 & Gemini</p>", unsafe_allow_html=True)
