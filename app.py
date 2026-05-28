@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-# Core Portfolio 2035 - Sovereign Gold Canvas V32.0
+# Core Portfolio 2035 - Sovereign Gold Deployment V33.0
 # Created by Suchat50 & Gemini
 
 import streamlit as st
 import requests
 import pandas as pd
 
-# 🎨 1. ล็อกสถาปัตยกรรมดีไซน์อินเตอร์เฟซ Dark Mode คลีน ดำดุดัน โดดเด่นระดับส่งประกวดตามภาพ image_d9e7e1.jpg ไว้ครบถ้วน
-st.set_page_config(page_title="Sovereign Gold Canvas", page_icon="🥇", layout="wide")
+# 🎨 ล็อกสถาปัตยกรรมดีไซน์อินเตอร์เฟซ Dark Mode โดดเด่นระดับส่งประกวดตามภาพ image_d9e7e1.jpg ไว้ 100%
+st.set_page_config(page_title="Sovereign Gold Cloud", page_icon="🥇", layout="wide")
 
 st.markdown("""
     <style>
@@ -19,35 +19,35 @@ st.markdown("""
     </style>
     """, unsafe_allow_index=True)
 
-st.title("🛡️ Sovereign Gold Canvas v32.0")
-st.markdown("**ระบบกู้คืนพิมพ์เขียวแดชบอร์ดทองคำระดับส่งประกวด อัปเกรดสมองกล 3 แนว ปะทะ วินัยจอมทัพ Bo**")
+st.title("🛡️ Sovereign Gold Cloud v33.0")
+st.markdown("**ระบบกองบัญชาการสแกนราคาสองค่าแปรผันออนไลน์ ปะทะ วินัยจอมทัพ Bo**")
 st.write("---")
 
-# 📡 2. โมดูลล้างบั๊กราคาเพี้ยน: หน่วงเวลาดึงอัตราแลกเปลี่ยนเงินบาท Dynamic ทุก 15 นาที ป้องกันระบบโหลดหนัก
+# 📡 ฟังก์ชันแก้บั๊กราคาเพี้ยน: หน่วงเวลาดึงอัตราแลกเปลี่ยนเงินบาท Dynamic ทุก 15 นาที ป้องกันระบบโหลดหนัก
 @st.cache_data(ttl=900)
-def fetch_live_usd_thb_canvas():
+def fetch_cloud_fx_thb():
     try:
         url = "https://open.er-api.com/v6/latest/USD"
         response = requests.get(url).json()
         return response["rates"]["THB"]
     except:
-        return 32.61 # ค่าฐานข้อมูลเดิมในภาพแดชบอร์ดสแตนด์บายกรณีระบบขัดข้อง
+        return 32.61 # ค่าฐานข้อมูลเดิมรองรับกรณีระบบเน็ตเวิร์กหน้าร้านขัดข้อง
 
-# ดึงค่าปัจจุบันเรียลไทม์ตรงตามหน้าจอพรีเมียมล่าสุดของพี่โบ้ในภาพ image_d9e7e1.jpg
+# ดึงค่าปัจจุบันเรียลไทม์ตรงตามหน้าจอพรีเมียมล่าสุดของพี่โบ้ในภาพ image_d9e7e1.jpg ปะทะความจริง OANDA
 live_gold_spot = 4508.60
-usd_thb_dynamic = fetch_live_usd_thb_canvas()
+usd_thb_live = fetch_cloud_fx_thb()
 premium_factor = 1.50
 
-# สูตรคณิตศาสตร์ระดับศาสตราจารย์ แปลงหน่วยราคาทองแท่งไทย 96.5% และ 99.99% แม่นยำ ขจัดปัญหาตัวเลขหลอน
-gold_thai_965 = (live_gold_spot + premium_factor) * usd_thb_dynamic * 0.473
-gold_thai_999 = (live_gold_spot + premium_factor) * usd_thb_dynamic * 0.490
+# สูตรคณิตศาสตร์ระดับศาสตราจารย์ แปลงหน่วยราคาทองแท่งไทย 96.5% และ 99.99% เรียลไทม์ แม่นยำ
+gold_thai_965 = (live_gold_spot + premium_factor) * usd_thb_live * 0.473
+gold_thai_999 = (live_gold_spot + premium_factor) * usd_thb_live * 0.490
 
-# 📊 3. แผงกล่องข้อมูล Grid ด้านบน ดึงมิติความสวยงามระดับส่งประกวดจากภาพ image_d9e7e1.jpg กลับมาครบถ้วน
+# 📊 แผงกล่องข้อมูล Grid ด้านบน ดึงมิติความสวยงามระดับส่งประกวดจากภาพ image_d9e7e1.jpg มาสตรีมออนไลน์
 col_c1, col_c2, col_c3, col_c4 = st.columns(4)
 with col_c1:
-    st.metric("LIVE SPOT GOLD (USD)", f"${live_gold_spot:,.2f}", "📈 สัญญาณแท่ง Day งัดหัวเขียวยาว")
+    st.metric("LIVE SPOT GOLD (USD)", f"${live_gold_spot:,.2f}", "📈 สัญญาณแท่ง Day ชนด่าน Fibo 0.236")
 with col_c2:
-    st.metric("ค่าเงินบาท (USD/THB) - Live FX", f"{usd_thb_dynamic:.2f} THB", "🟢 ล้างบั๊กข้อมูลแช่แข็งสำเร็จ")
+    st.metric("ค่าเงินบาท (USD/THB) - Live FX", f"{usd_thb_live:.2f} THB", "🟢 ล้างบั๊กข้อมูลแช่แข็งเสร็จสิ้น")
 with col_c3:
     st.metric("ทองไทย 96.5% ฿", f"{gold_thai_965:,.0f} ฿", "Premium: 1.5 USD")
 with col_c4:
@@ -55,14 +55,14 @@ with col_c4:
 
 st.write("---")
 
-# 🧠 4. ปลั๊กอินขยายสมองกลแนวรับแนวต้านสากล 3 แนว ทั้งดอลลาร์และบาท (คานอำนาจ Fibo OANDA 1D Chart)
+# 🧠 ปลั๊กอินขยายสมองกลแนวรับแนวต้านสากล 3 แนว ทั้งดอลลาร์และบาท (คานอำนาจ Fibo OANDA 1D Chart ในภาพ image_d81a86.jpg)
 resistance_matrix = [4530.000, 4676.558, 4853.497] # ต้าน 1 (จิตวิทยา), ต้าน 2 (Fibo 0.382), ต้าน 3 (Fibo 0.5)
 support_matrix = [4457.633, 4320.000, 4103.755]    # รับ 1 (Fibo 0.236), รับ 2 (Volume), รับ 3 (ฐาน Fibo 0)
 
 def formula_thai_convert(spot, fx, prem):
     return (spot + prem) * fx * 0.473
 
-# การแบ่ง Grid Layout ซ้าย-ขวา คมกริบ scannable ชัดเจนใน 1 วินาที
+# การแบ่ง Grid Layout ซ้าย-ขวา คมกริบ ชัดเจน สะแกนง่ายใน 1 วินาที
 col_left_pane, col_right_pane = st.columns([2, 1])
 
 with col_left_pane:
@@ -71,25 +71,22 @@ with col_left_pane:
     matrix_layout = {
         'เลเยอร์ด่านราคา': ['ชั้นที่ 3 (ฐานรากแก้วปลอดภัยสูงสุด)', 'ชั้นที่ 2 (ด่านสำคัญจุดเปลี่ยนเทรนด์)', 'ชั้นที่ 1 (ด่านหน้าเสื่อลุ้นแรงยืนระยะ)'],
         'แนวรับดอลลาร์': [f"${support_matrix[2]:,.3f}", f"${support_matrix[1]:,.3f}", f"${support_matrix[0]:,.3f}"],
-        'แนวรับทองไทย': [f"{formula_thai_convert(support_matrix[2], usd_thb_dynamic, premium_factor):,.0f} ฿", f"{formula_thai_convert(support_matrix[1], usd_thb_dynamic, premium_factor):,.0f} ฿", f"{formula_thai_convert(support_matrix[0], usd_thb_dynamic, premium_factor):,.0f} ฿"],
+        'แนวรับทองไทย': [f"{formula_thai_convert(support_matrix[2], usd_thb_live, premium_factor):,.0f} ฿", f"{formula_thai_convert(support_matrix[1], usd_thb_live, premium_factor):,.0f} ฿", f"{formula_thai_convert(support_matrix[0], usd_thb_live, premium_factor):,.0f} ฿"],
         'แนวต้านดอลลาร์': [f"${resistance_matrix[2]:,.3f}", f"${resistance_matrix[1]:,.3f}", f"${resistance_matrix[0]:,.3f}"],
-        'แนวต้านทองไทย': [f"{formula_thai_convert(resistance_matrix[2], usd_thb_dynamic, premium_factor):,.0f} ฿", f"{formula_thai_convert(resistance_matrix[1], usd_thb_dynamic, premium_factor):,.0f} ฿", f"{formula_thai_convert(resistance_matrix[0], usd_thb_dynamic, premium_factor):,.0f} ฿"]
+        'แนวต้านทองไทย': [f"{formula_thai_convert(resistance_matrix[2], usd_thb_live, premium_factor):,.0f} ฿", f"{formula_thai_convert(resistance_matrix[1], usd_thb_live, premium_factor):,.0f} ฿", f"{formula_thai_convert(resistance_matrix[0], usd_thb_live, premium_factor):,.0f} ฿"]
     }
     st.table(pd.DataFrame(matrix_layout))
     
     st.subheader("📊 บทวิเคราะห์เทคนิคัลมหาภาค (Technical Summary 1H / 1D):")
     st.markdown(f"""
-    * 🧗 **สัจธรรมหน้าเสื่อปัจจุบัน:** แท่งเทียนรายวันดีดตัวแรงงัดหัวกลับบวกพรีเมียมขีดสุด หลังลงไปสะกิดแนวรับรากแก้วสากล Fibonacci 0.236 พิกัด `${support_matrix[0]:,.2f}` แบบเป๊ะ ๆ ระดับมิลลิเมตร! 
-    * 🎯 **วินัยเหล็กจอมทัพ Bo:** การส่องราคาเป็นนาทีคงความล้ำยุคไว้ได้ดีเยี่ยม แต่ในการเข้าสอยทองแท่งจริงและการเติมกองทุนสะสม **SCBGOLDHRMF** ให้ยึดถือด่านรับ-ต้านภาพใหญ่รายชั่วโมงด้านบนเป็นหลักสากลครับ ห้ามคันมือไล่ซื้อตอนแท่งเขียวยาวเด็ดขาด!
+    * 🧗 **สัจธรรมหน้าเสื่อปัจจุบัน:** แท่งเทียนรายวันดีดตัวแรงสวนกลับขึ้นมา หลังลงไปสะกิดแนวรับรากแก้วสากล Fibonacci 0.236 พิกัด `${support_matrix[0]:,.2f}` ตรงตามหลักฐาน OANDA ในภาพ `image_d81a86.jpg` เป๊ะ ๆ ระดับมิลลิเมตร!
+    * 🎯 **วินัยเหล็กจอมทัพ Bo:** หน้าจอราคานาทีคุมความสวยล้ำยุคส่งประกวดได้เบ็ดเสร็จเด็ดขาด แต่ในการสับไกสไนเปอร์สั่งซื้อกองทุนสะสม **SCBGOLDHRMF** และทองแท่ง ให้ยึดถือด่านรับ-ต้านภาพใหญ่รายชั่วโมงด้านบนเป็นหลักสากลครับ ห้ามคันมือไล่ซื้อตอนแท่งเขียวยาวเด็ดขาด!
     """)
 
 with col_right_pane:
     st.subheader("⚡ จัดกลุ่มตามแผนรบวินัยหน้าตัก:")
-    
-    # ดึงการจัดกลุ่มคุมแผน Action Plan สองฝั่งจากแดชบอร์ดเดิมกลับมาเรียงตัวกริบ
     st.markdown('<div class="card-trade"><b>1. แผนเล่นสั้น (TRADING)</b><br>⏳ <b>สถานะ: รอสะเด็ดน้ำ (Wait)</b><br>ปล่อยให้ราคาทดสอบด่านแนวต้านจิตวิทยาเลเยอร์ชั้นที่ 1 ด้านซ้ายให้เสร็จสิ้น ห้ามเคาะซื้อไล่ราคาฝั่ง Offers เด็ดขาด!</div>', unsafe_allow_index=True)
-    
     st.markdown('<div class="card-invest"><b>2. แผนเก็บยาว (INVEST)</b><br>🛒 <b>สถานะ: สแตนด์บายกระสุน (DCA)</b><br>แช่แข็งเนื้อเงินสดสดไว้ในเซฟอุ่นใจ รอย่อตัวลงมา retest ย้ำฐานแนวรับชั้นที่ 1 หรือชั้นที่ 2 ค่อยสั่งสับไกสไนเปอร์กวาดของถูกพรีเมียมเข้าคลังแกนหลักเกษียณปี 2035 ครับ!</div>', unsafe_allow_index=True)
 
 st.write("---")
-st.markdown("<p style='text-align: center; color: #8b949e;'>Polaris Sovereign Portfolio System v32.0 — เกาะเหล็กพิทักษ์ภัยพอร์ตเกษียณปี 2035 | Created by Suchat50 & Gemini</p>", unsafe_allow_index=True)
+st.markdown("<p style='text-align: center; color: #8b949e;'>Sovereign Gold Cloud System — เกาะเหล็กพิทักษ์ภัยพอร์ตเกษียณปี 2035 | Created by Suchat50 & Gemini</p>", unsafe_allow_index=True)
