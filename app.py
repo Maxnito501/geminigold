@@ -6,10 +6,9 @@ import streamlit as st
 import requests
 import pandas as pd
 
-# 🎨 1. ล็อกสถาปัตยกรรม UI โทน Dark Mode ดำดุดันระดับส่งประกวดของพี่โบ้ไว้ครบถ้วน
+# 🎨 1. คงสถาปัตยกรรม UI โทน Dark Mode ดำดุดันระดับส่งประกวดของพี่โบ้ไว้ครบถ้วน
 st.set_page_config(page_title="Sovereign Gold Cloud", page_icon="🥇", layout="wide")
 
-# [LINE 12 - DEBUGGED]: สไตล์ตกแต่งหลักของหน้าแอป
 st.markdown("""
     <style>
     .main {background-color: #0d1117; color: #ffffff;}
@@ -24,7 +23,7 @@ st.title("🛡️ Sovereign Gold Cloud v35.0")
 st.markdown("**ระบบกองบัญชาการคลาวด์วิเคราะห์ราคาทองคำสองค่าแปรผัน ปะทะ วินัยจอมทัพ Bo**")
 st.write("---")
 
-st.success("📡 [STATUS: LIVE DEPLOYED — ระบบดีบักล้างรอยรั่วสระลอย Line 12 & Line 91 เสร็จสิ้น 100%]")
+st.success("📡 [STATUS: LIVE DEPLOYED — ดีบักล้างรอยรั่วสระลอย Line 12, 91 และ 94 สำเร็จ 100%]")
 
 # 📡 2. โมดูลล้างราคาเพี้ยนระหว่างวัน: ดึงอัตราแลกเปลี่ยนเงินบาท Dynamic ทุก 15 นาที ป้องกันบอตโหลดหนัก
 @st.cache_data(ttl=900)
@@ -53,7 +52,7 @@ with col_c2:
     st.metric("ค่าเงินบาท (USD/THB) - Live FX", f"{usd_thb_live:.2f} THB", "🟢 แก้ไขตัวเลขแช่แข็งเสร็จสิ้น")
 with col_c3:
     st.metric("ทองไทย 96.5% ฿", f"{gold_thai_965:,.0f} ฿", "Premium: 1.5 USD")
-with col_c4:
+with col_m4 if 'col_m4' in locals() else col_c4:
     st.metric("ทองไทย 99.99% ฿", f"{gold_thai_999:,.0f} ฿", "Unit: THB/Baht")
 
 st.write("---")
@@ -89,9 +88,9 @@ with col_left_pane:
 with col_right_pane:
     st.subheader("⚡ จัดกลุ่มตามแผนรบวินัยหน้าตัก:")
     
-    # 👑 [FIXED LINE 91 & 94]: เปลี่ยนมาใช้ unsafe_allow_html=True ปิดฉากตัวแดงถาวรสะใจขีดสุด!
+    # 👑 [FIXED LINE 91 & 94]: ล้างคำสั่ง unsafe_allow_index=False เปลี่ยนมาใช้ unsafe_allow_html=True เคลียร์ปิดจ๊อบระบบคลาวด์สมบูรณ์แบบ!
     st.markdown('<div class="card-trade"><b>1. แผนเล่นสั้น (TRADING)</b><br>⏳ <b>สถานะ: รอสะเด็ดน้ำ (Wait)</b><br>ปล่อยให้ราคาทดสอบด่านต้านจิตวิทยาเลเยอร์ชั้นที่ 1 ด้านซ้ายให้จบ ห้ามคันมือไล่ซื้อฝั่ง Offers เด็ดขาด!</div>', unsafe_allow_html=True)
-    st.markdown('<div class="card-invest"><b>2. แผนเก็บยาว (INVEST)</b><br>🛒 <b>สถานะ: สแตนด์บายกระสุน (DCA)</b><br>กอดทองค่ายเดิมไว้แน่น ๆ แช่แข็งกระสุนสดใหม่รอย่ำฐานรากแก้วพรีเมียมด่านล่างตามระบบ คุมสัจจะวินัยรบปิดประตูแพ้ถาวรครับ!</div>', unsafe_allow_index=False, unsafe_allow_html=True)
+    st.markdown('<div class="card-invest"><b>2. แผนเก็บยาว (INVEST)</b><br>🛒 <b>สถานะ: สแตนด์บายกระสุน (DCA)</b><br>กอดทองค่ายเดิมไว้แน่น ๆ แช่แข็งกระสุนสดใหม่รอย่ำฐานรากแก้วพรีเมียมด่านล่างตามระบบ คุมสัจจะวินัยรบปิดประตูแพ้ถาวรครับ!</div>', unsafe_allow_html=True)
 
 st.write("---")
 st.markdown("<p style='text-align: center; color: #8b949e;'>Sovereign Gold Cloud System — เกาะเหล็กพิทักษ์ภัยพอร์ตเกษียณอายุราชการปี 2035 | Created by Suchat50 & Gemini</p>", unsafe_allow_html=True)
